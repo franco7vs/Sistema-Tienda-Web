@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Lista de Clientes</h2>
+<a href="/agregar-cliente" class="btn btn-primary mb-3">Agregar Cliente</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Dirección</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cliente in clientes %}
+    <tr>
+      <td>{{ cliente[1] }}</td>
+      <td>{{ cliente[2] }}</td>
+      <td>{{ cliente[3] }}</td>
+      <td>{{ cliente[4] }}</td>
+      <td>
+        <a href="/editar-cliente/{{ cliente[0] }}" class="btn btn-sm btn-warning">Editar</a>
+        <form method="POST" action="/eliminar-cliente/{{ cliente[0] }}" style="display:inline;">
+          <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro querés eliminar este cliente?');">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

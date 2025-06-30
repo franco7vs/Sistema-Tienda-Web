@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nueva Venta</h2>
+<form method="POST">
+  <div class="mb-3">
+    <label for="cliente" class="form-label">Cliente</label>
+    <select name="cliente" id="cliente" class="form-select" required>
+      <option value="">Seleccione un cliente</option>
+      {% for cliente in clientes %}
+      <option value="{{ cliente[0] }}">{{ cliente[1] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div id="productos-container">
+    <div class="producto-item mb-3">
+      <label class="form-label">Producto</label>
+      <select name="producto" class="form-select" required>
+        <option value="">Seleccione un producto</option>
+        {% for producto in productos %}
+        <option value="{{ producto[0] }}">{{ producto[1] }} (Stock: {{ producto[2] }}, Precio: ${{ producto[3] }})</option>
+        {% endfor %}
+      </select>
+      <label class="form-label mt-2">Cantidad</label>
+      <input type="number" name="cantidad" class="form-control" min="1" value="1" required>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-secondary mb-3" onclick="agregarProducto()">Agregar otro producto</button>
+  <br>
+  <button type="submit" class="btn btn-primary">Registrar Venta</button>
+  <a href="/ventas" class="btn btn-secondary">Cancelar</a>
+</form>
+
+<script>
+function agregarProducto() {
+  const container = document.getElementById('productos-container');
+  const nuevoProducto = document.querySelector('.producto-item').cloneNode(true);
+  nuevoProducto.querySelector('select').value = '';
+  nuevoProducto.querySelector('input').value = 1;
+  container.appendChild(nuevoProducto);
+}
+</script>
+{% endblock %}

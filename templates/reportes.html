@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Reportes del Sistema</h2>
+
+<h4>📆 Total de Ventas por Día</h4>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Fecha</th><th>Total ($)</th></tr>
+  </thead>
+  <tbody>
+    {% for fila in ventas_por_dia %}
+    <tr><td>{{ fila[0] }}</td><td>{{ "%.2f"|format(fila[1]) }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h4>📦 Total de Compras por Día</h4>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Fecha</th><th>Total ($)</th></tr>
+  </thead>
+  <tbody>
+    {% for fila in compras_por_dia %}
+    <tr><td>{{ fila[0] }}</td><td>{{ "%.2f"|format(fila[1]) }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h4>🏆 Producto Más Vendido</h4>
+<p>
+  {% if producto_top %}
+    {{ producto_top[0] }} - {{ producto_top[1] }} unidades
+  {% else %}
+    No hay datos.
+  {% endif %}
+</p>
+
+<h4>👤 Cliente con Más Compras</h4>
+<p>
+  {% if mejor_cliente %}
+    {{ mejor_cliente[0] }} - {{ mejor_cliente[1] }} compras
+  {% else %}
+    No hay datos.
+  {% endif %}
+</p>
+
+<h4>🚚 Proveedor con Más Operaciones</h4>
+<p>
+  {% if mejor_proveedor %}
+    {{ mejor_proveedor[0] }} - {{ mejor_proveedor[1] }} compras
+  {% else %}
+    No hay datos.
+  {% endif %}
+</p>
+
+{% endblock %}

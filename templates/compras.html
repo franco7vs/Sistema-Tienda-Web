@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Historial de Compras</h2>
+<a href="/nueva-compra" class="btn btn-primary mb-3">Registrar Compra</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID Compra</th>
+      <th>Proveedor</th>
+      <th>Fecha</th>
+      <th>Total ($)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for compra in compras %}
+    <tr>
+      <td>{{ compra[0] }}</td>
+      <td>{{ compra[1] }}</td>
+      <td>{{ compra[2] }}</td>
+      <td>{{ "%.2f"|format(compra[3]) }}</td>
+      <td><a href="/detalle-compra/{{ compra[0] }}" class="btn btn-info btn-sm">Ver detalle</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

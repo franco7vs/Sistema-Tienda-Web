@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Detalle de Venta #{{ venta[0] }}</h2>
+<p><strong>Cliente:</strong> {{ venta[1] }}</p>
+<p><strong>Fecha:</strong> {{ venta[2] }}</p>
+<p><strong>Total:</strong> ${{ "%.2f"|format(venta[3]) }}</p>
+
+<h4>Productos vendidos:</h4>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Producto</th><th>Cantidad</th><th>Precio Unitario</th></tr>
+  </thead>
+  <tbody>
+    {% for d in detalles %}
+    <tr>
+      <td>{{ d[0] }}</td>
+      <td>{{ d[1] }}</td>
+      <td>${{ "%.2f"|format(d[2]) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="/ventas" class="btn btn-secondary">Volver</a>
+{% endblock %}

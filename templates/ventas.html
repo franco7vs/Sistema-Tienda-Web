@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Historial de Ventas</h2>
+<a href="/nueva-venta" class="btn btn-primary mb-3">Nueva Venta</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID Venta</th>
+      <th>Cliente</th>
+      <th>Fecha</th>
+      <th>Total ($)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for venta in ventas %}
+    <tr>
+      <td>{{ venta[0] }}</td>
+      <td>{{ venta[1] }}</td>
+      <td>{{ venta[2] }}</td>
+      <td>{{ "%.2f"|format(venta[3]) }}</td>
+      <td><a href="/detalle-venta/{{ venta[0] }}" class="btn btn-info btn-sm">Ver detalle</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Lista de Proveedores</h2>
+<a href="/agregar-proveedor" class="btn btn-primary mb-3">Agregar Proveedor</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Dirección</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for proveedor in proveedores %}
+    <tr>
+      <td>{{ proveedor[1] }}</td>
+      <td>{{ proveedor[2] }}</td>
+      <td>{{ proveedor[3] }}</td>
+      <td>{{ proveedor[4] }}</td>
+      <td>
+        <a href="/editar-proveedor/{{ proveedor[0] }}" class="btn btn-sm btn-warning">Editar</a>
+        <form method="POST" action="/eliminar-proveedor/{{ proveedor[0] }}" style="display:inline;">
+          <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro querés eliminar este proveedor?');">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
